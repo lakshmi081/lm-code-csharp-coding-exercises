@@ -8,36 +8,61 @@ namespace Exercises
     {
         public string CapitalizeWord(string word)
         {
-            // Replace the exception statement below with your code!
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(word))
+                return word;
+            if (word.Length == 1)
+                return word.ToUpper();
+            return word.Remove(1).ToUpper() + word.Substring(1);
         }
 
         public string GenerateInitials(string firstName, string lastName)
         {
-            // Replace the exception statement below with your code!
-            throw new NotImplementedException();
+            String initials = "";
+            if (firstName.Length >= 1 && lastName.Length >= 1)
+                initials = firstName.Remove(1).ToUpper() + "." + lastName.Remove(1).ToUpper();
+            return initials;
         }
 
         public double AddVat(double originalPrice, double vatRate)
         {
-            // Replace the exception statement below with your code!
-            throw new NotImplementedException();
-
-            // NB: Look in Exercise001Tests.cs
-            //     There is a test with commented out assertions.
-            //     For an extra challenge, uncomment those assertions and make that test pass too.
+            if (originalPrice < 0)
+                throw new ArgumentException("Price cannot be negative. Please enter a valid price.");
+            if (vatRate < 0)
+                throw new ArgumentException("VAT cannot be negative. Please enter a valid VAT.");
+            double rate = (vatRate + 100) / 100;
+            double val = originalPrice * rate;
+            val = Math.Round(val, 2);
+            return val;
         }
 
         public string Reverse(string sentence)
         {
-            // Replace the exception statement below with your code!
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(sentence))
+                return sentence;
+            char[] chars = new char[sentence.Length];
+            for (int start = 0, end = sentence.Length - 1; start <= end; start++, end--)
+            {
+                chars[start] = sentence[end];
+                chars[end] = sentence[start];
+            }
+            return new string(chars);
         }
 
         public int CountLinuxUsers(List<User> users)
         {
-            // Replace the exception statement below with your code!
-            throw new NotImplementedException();
+            int count = 0;
+            if (users == null || users.Count == 0)
+            {
+                return count;
+            }
+            foreach (User linux in users)
+            {
+                if ("LINUX".Equals(linux.Type.ToUpper()))
+                    count++;
+            }
+            return count;
+
         }
+
     }
 }
